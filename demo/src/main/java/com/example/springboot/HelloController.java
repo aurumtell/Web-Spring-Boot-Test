@@ -1,12 +1,12 @@
 package com.example.springboot;
 
-import entity.users;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
+
+import com.example.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import repository.UsersRepository;
+import com.example.repository.UsersRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,23 +28,24 @@ public class HelloController {
 
     @RequestMapping("/users")
     @ResponseBody
-    public ResponseEntity<List<users>> getAllItems(){
-        List<users> items = userRepo.findAll();
-        return new ResponseEntity<List<users>>(items, HttpStatus.OK);
+    public ResponseEntity<List<User>> getAllItems(){
+        List<User> items = userRepo.findAll();
+        return new ResponseEntity<List<User>>(items, HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}")
     @ResponseBody
-    public ResponseEntity<users> getItem(Long userId){
-        Optional<users> item = userRepo.findById(userId);
-        return new ResponseEntity<users>(item.get(), HttpStatus.OK);
+    public ResponseEntity<User> getItem(Long userId){
+        Optional<User> item = userRepo.findById(userId);
+        return new ResponseEntity<User>(item.get(), HttpStatus.OK);
     }
 
     @GetMapping("/users/{name}")
     @ResponseBody
-    public ResponseEntity<List<users>> getItemByName(String name){
-        List<users> items = userRepo.findAllByFirstName(name);
-        return new ResponseEntity<List<users>>(items, HttpStatus.OK);
+    public ResponseEntity<User> getItemByName(String name){
+        User items = userRepo.findByfirstName(name);
+        System.out.println(items);
+        return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
 }
