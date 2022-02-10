@@ -1,0 +1,201 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet id="course-table-creation" author="dayana">
+        <sql>
+            CREATE TABLE IF NOT EXISTS course (
+            id INT SERIAL,
+            title VARCHAR(50) NOT NULL,
+            description TEXT NULL
+            PRIMARY KEY (id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
+    <changeSet id="default-course-creation" author="dayana">
+        <sql>
+            INSERT INTO course VALUES(1, 'НИС по IOS разработке 2 курс', 'Сосновский Григорий Михайлович');
+            INSERT INTO course VALUES(1, 'НИС по IOS разработке 3 курс', 'Сосновский Григорий Михайлович');
+        </sql>
+    </changeSet>
+<!--    <changeSet id="user-table-creation" author="vovkvant">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS user (-->
+<!--            id int(11) NOT NULL AUTO_INCREMENT,-->
+<!--            name VARCHAR(225) NOT NULL,-->
+<!--            login VARCHAR(225) NOT NULL,-->
+<!--            password VARCHAR(225) NOT NULL,-->
+
+<!--            created_by VARCHAR(225) DEFAULT NULL,-->
+<!--            created_at DATETIME DEFAULT NULL,-->
+<!--            modified_by VARCHAR(225) DEFAULT NULL,-->
+<!--            modified_at DATETIME DEFAULT NULL,-->
+<!--            deleted INT(1) DEFAULT 0,-->
+<!--            PRIMARY KEY (id)-->
+<!--            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="section-table-creation" author="Uinny-m">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS section (-->
+<!--            id int(11) NOT NULL AUTO_INCREMENT,-->
+<!--            title VARCHAR(225) NOT NULL,-->
+<!--            description TEXT NOT NULL,-->
+<!--            h1_title VARCHAR(255) DEFAULT NULL,-->
+<!--            keywords VARCHAR(255) DEFAULT NULL,-->
+<!--            image VARCHAR(255) DEFAULT NULL,-->
+<!--            tags VARCHAR(255) DEFAULT NULL,-->
+<!--            sort_order INT(4),-->
+
+<!--            created_by VARCHAR(225) DEFAULT NULL,-->
+<!--            created_at DATETIME DEFAULT NULL,-->
+<!--            modified_by VARCHAR(225) DEFAULT NULL,-->
+<!--            modified_at DATETIME DEFAULT NULL,-->
+<!--            deleted INT(1) DEFAULT 0,-->
+<!--            PRIMARY KEY (id)-->
+<!--            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="role-table-creation" author="vovkvant">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS role (-->
+<!--            id int(11) NOT NULL AUTO_INCREMENT,-->
+<!--            title VARCHAR(225) NOT NULL,-->
+<!--            code ENUM('ROLE_ADMIN', 'ROLE_USER') NOT NULL DEFAULT 'ROLE_USER',-->
+
+<!--            created_by VARCHAR(225) DEFAULT NULL,-->
+<!--            created_at DATETIME DEFAULT NULL,-->
+<!--            modified_by VARCHAR(225) DEFAULT NULL,-->
+<!--            modified_at DATETIME DEFAULT NULL,-->
+<!--            deleted INT(1) DEFAULT 0,-->
+<!--            PRIMARY KEY (id)-->
+<!--            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="user-role-table-creation" author="vovkvant">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS user_role (-->
+<!--            user_id int(11) NOT NULL,-->
+<!--            role_id int(11) NOT NULL,-->
+
+<!--            CONSTRAINT role_fk FOREIGN KEY (user_id) REFERENCES user(id),-->
+<!--            CONSTRAINT user_fk FOREIGN KEY (role_id) REFERENCES role(id)-->
+<!--            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="confirmation-user-fields" author="vovkvant">-->
+<!--        <sql>-->
+<!--            ALTER TABLE user ADD confirmation_code VARCHAR(255);-->
+<!--            ALTER TABLE user ADD reset_code VARCHAR(255) DEFAULT NULL;-->
+<!--            ALTER TABLE user ADD confirmed INT(1) DEFAULT 0;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="payment-type-table-creation" author="vovkvant">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS payment_type (-->
+<!--            id int(11) NOT NULL AUTO_INCREMENT,-->
+<!--            name VARCHAR(225) NOT NULL,-->
+<!--            description TEXT NOT NULL,-->
+<!--            duration INT(4) NOT NULL,-->
+<!--            duration_unit ENUM('DAY', 'MONTH') NOT NULL DEFAULT 'MONTH',-->
+<!--            price INT(6) NOT NULL,-->
+<!--            visible INT(1) DEFAULT 0,-->
+<!--            is_default INT(1) DEFAULT 0,-->
+
+<!--            created_by VARCHAR(225) DEFAULT NULL,-->
+<!--            created_at DATETIME DEFAULT NULL,-->
+<!--            modified_by VARCHAR(225) DEFAULT NULL,-->
+<!--            modified_at DATETIME DEFAULT NULL,-->
+<!--            deleted INT(1) DEFAULT 0,-->
+<!--            PRIMARY KEY (id)-->
+<!--            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="user-payment-table-creation" author="vovkvant">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS user_payment (-->
+<!--            id int(11) NOT NULL AUTO_INCREMENT,-->
+<!--            user_id int(11) NOT NULL,-->
+<!--            payment_type_id int(11) NOT NULL,-->
+<!--            created_at DATETIME DEFAULT NULL,-->
+<!--            valid_until DATETIME DEFAULT NULL,-->
+
+<!--            CONSTRAINT user_payment_fk FOREIGN KEY (user_id) REFERENCES user(id),-->
+<!--            CONSTRAINT payment_type_fk FOREIGN KEY (payment_type_id) REFERENCES payment_type(id),-->
+<!--            PRIMARY KEY (id)-->
+<!--            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="user-subscription-table-creation" author="vovkvant">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS user_subscription (-->
+<!--            id int(11) NOT NULL AUTO_INCREMENT,-->
+<!--            user_id int(11) NOT NULL,-->
+<!--            course_id int(11) NOT NULL,-->
+<!--            is_active INT(1) DEFAULT 0,-->
+
+<!--            CONSTRAINT user_role_fk FOREIGN KEY (user_id) REFERENCES user(id),-->
+<!--            CONSTRAINT user_subscription_fk FOREIGN KEY (course_id) REFERENCES course(id),-->
+<!--            PRIMARY KEY (id)-->
+<!--            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="course-table-update" author="Uinny-m">-->
+<!--        <sql>-->
+<!--            ALTER TABLE course ADD draft INT(1) DEFAULT 1;-->
+<!--            ALTER TABLE course ADD section_id int(11) NOT NULL;-->
+<!--            ALTER TABLE course ADD-->
+<!--            CONSTRAINT section_fk FOREIGN KEY (section_id) REFERENCES section(id);-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="lecture-table-creation" author="Uinny-m">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS lecture (-->
+<!--            id int(11) NOT NULL AUTO_INCREMENT,-->
+<!--            title VARCHAR(225) NOT NULL,-->
+<!--            description TEXT NOT NULL,-->
+<!--            h1_title VARCHAR(255) DEFAULT NULL,-->
+<!--            keywords VARCHAR(255) DEFAULT NULL,-->
+<!--            image VARCHAR(255) DEFAULT NULL,-->
+<!--            tags VARCHAR(255) DEFAULT NULL,-->
+<!--            sort_order INT(4),-->
+<!--            course_id INT(11) NOT NULL,-->
+
+<!--            created_by VARCHAR(225) DEFAULT NULL,-->
+<!--            created_at DATETIME DEFAULT NULL,-->
+<!--            modified_by VARCHAR(225) DEFAULT NULL,-->
+<!--            modified_at DATETIME DEFAULT NULL,-->
+<!--            deleted INT(1) DEFAULT 0,-->
+
+<!--            CONSTRAINT course_fk FOREIGN KEY (course_id) REFERENCES course(id),-->
+<!--            PRIMARY KEY (id)-->
+<!--            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="video-table-creation" author="vovkvant">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS video (-->
+<!--            id int(11) NOT NULL AUTO_INCREMENT,-->
+<!--            lecture_id int(11) NOT NULL,-->
+<!--            vimeo_video_id int(11) NOT NULL,-->
+<!--            vimeo_title VARCHAR(225) NOT NULL,-->
+<!--            html TEXT NOT NULL,-->
+<!--            thumbnail_url VARCHAR(225) NOT NULL,-->
+<!--            thumbnail_url_with_play_button VARCHAR(225) NOT NULL,-->
+<!--            duration int(11) NOT NULL,-->
+<!--            sort_order INT(4),-->
+
+<!--            created_by VARCHAR(225) DEFAULT NULL,-->
+<!--            created_at DATETIME DEFAULT NULL,-->
+<!--            modified_by VARCHAR(225) DEFAULT NULL,-->
+<!--            modified_at DATETIME DEFAULT NULL,-->
+<!--            deleted INT(1) DEFAULT 0,-->
+<!--            PRIMARY KEY (id)-->
+<!--            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+
+</databaseChangeLog>
